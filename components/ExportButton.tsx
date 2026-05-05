@@ -35,11 +35,7 @@ export default function ExportButton({ head, flowRate, efficiency, result, turbi
       reportRef.current.style.left = "-9999px";
       reportRef.current.style.top = "0";
 
-      const canvas = await html2canvas(reportRef.current, {
-        backgroundColor: "#ffffff",
-        scale: 2,
-        useCORS: true,
-      });
+      const canvas = await html2canvas(reportRef.current);
 
       reportRef.current.style.display = "none";
 
