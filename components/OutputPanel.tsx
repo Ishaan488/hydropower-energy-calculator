@@ -3,7 +3,7 @@
 import React from "react";
 import InfoTooltip from "./InfoTooltip";
 import PowerGauge from "./PowerGauge";
-import { HydroResult, formatNumber, getClassificationColor } from "@/lib/calculations";
+import { HydroResult, formatNumber } from "@/lib/calculations";
 import { tooltips } from "@/lib/tooltipData";
 
 interface OutputPanelProps {
@@ -47,6 +47,33 @@ export default function OutputPanel({ result, efficiency }: OutputPanelProps) {
             {formatNumber(result.powerMW, 3)}
             <span className="text-xs text-emerald-500/50 ml-1">MW</span>
           </div>
+        </div>
+      </div>
+
+      {/* Capacity & realistic annual energy */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-zinc-950 rounded-lg p-4 text-center border border-zinc-800/80">
+          <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold mb-1 flex items-center justify-center gap-1.5">
+            <span>Capacity Factor</span>
+            <InfoTooltip content={tooltips.capacityFactorCard} />
+          </div>
+          <div className="font-mono text-xl font-medium text-amber-400">
+            {Math.round(result.capacityFactor * 100)}
+            <span className="text-xs text-amber-500/60 ml-1">%</span>
+          </div>
+          <div className="text-[10px] text-zinc-500 mt-1">Typical: {result.capacityFactorRange}</div>
+        </div>
+
+        <div className="bg-zinc-950 rounded-lg p-4 text-center border border-zinc-800/80">
+          <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold mb-1 flex items-center justify-center gap-1.5">
+            <span>Actual Energy/Year</span>
+            <InfoTooltip content={tooltips.actualEnergyYearly} />
+          </div>
+          <div className="font-mono text-xl font-medium text-cyan-400">
+            {formatNumber(result.energyPerYearAtCapacityFactorMWh)}
+            <span className="text-xs text-cyan-500/60 ml-1">MWh</span>
+          </div>
+          <div className="text-[10px] text-zinc-500 mt-1">MWh/year (realistic)</div>
         </div>
       </div>
 

@@ -19,8 +19,8 @@ export default function HomePage() {
   const [nextId, setNextId] = useState(1);
 
   const result = useMemo(
-    () => calculateHydropower(head, flowRate, efficiency),
-    [head, flowRate, efficiency]
+    () => calculateHydropower(head, flowRate, efficiency, plantType),
+    [head, flowRate, efficiency, plantType]
   );
   const turbine = useMemo(() => recommendTurbine(head), [head]);
 
