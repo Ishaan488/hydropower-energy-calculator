@@ -2,26 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #09090b; /* zinc-950 */
+  color: #fafafa; /* zinc-50 */
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .glass-card {
+    @apply bg-zinc-900/80 border border-zinc-800/80 rounded-xl shadow-sm backdrop-blur-sm;
   }
+
+  .input-field {
+    @apply w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-zinc-200
+           placeholder-zinc-600 transition-all duration-200 outline-none font-mono text-sm;
+  }
+
+  .input-field:focus {
+    @apply border-blue-500/50 ring-1 ring-blue-500/20;
+  }
+
+  .label-text {
+    @apply text-sm font-medium text-zinc-400 mb-1.5 flex items-center gap-1.5;
+  }
+
+  .section-title {
+    @apply text-base font-medium text-zinc-100 flex items-center gap-2;
+  }
+}
+
+/* Custom range slider — clean style */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #27272a; /* zinc-800 */
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6; /* blue-500 */
+  border: 2px solid #09090b; /* zinc-950 */
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #09090b;
+  cursor: pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+/* Number input hide spinners */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Tooltip */
+.tooltip-enter {
+  animation: tooltip-fade 0.15s ease-out;
+}
+@keyframes tooltip-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Flow particle */
+@keyframes flow-particle {
+  0% { transform: translateX(0%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
 }
